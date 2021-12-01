@@ -5,27 +5,27 @@
       <!-- Register v1 -->
       <b-card class="mb-0">
         <b-link class="brand-logo">
-          <vuexy-logo />
+          <!-- <vuexy-logo /> -->
           <h2 class="brand-text text-primary ml-1">
-            Vuexy
+            LYL Portal
           </h2>
         </b-link>
 
-        <b-card-title class="mb-1">
+        <!-- <b-card-title class="mb-1">
           Adventure starts here 🚀
         </b-card-title>
         <b-card-text class="mb-2">
           Make your app management easy and fun!
-        </b-card-text>
+        </b-card-text> -->
 
         <!-- form -->
         <validation-observer ref="registerForm">
           <b-form
             class="auth-register-form mt-2"
-            @submit.prevent="validationForm"
+            @submit.prevent="createUser"
           >
             <!-- username -->
-            <b-form-group
+            <!-- <b-form-group
               label="Username"
               label-for="username"
             >
@@ -43,7 +43,7 @@
                 />
                 <small class="text-danger">{{ errors[0] }}</small>
               </validation-provider>
-            </b-form-group>
+            </b-form-group> -->
 
             <!-- email -->
             <b-form-group
@@ -57,7 +57,7 @@
               >
                 <b-form-input
                   id="email"
-                  v-model="regEmail"
+                  v-model="register.email"
                   :state="errors.length > 0 ? false:null"
                   name="register-email"
                   placeholder="john@example.com"
@@ -66,15 +66,58 @@
               </validation-provider>
             </b-form-group>
 
+            <!-- first name -->
+            <b-form-group
+              label="First Name"
+              label-for="first_name"
+            >
+              <validation-provider
+                #default="{ errors }"
+                name="Firstname"
+                rules="required"
+              >
+                <b-form-input
+                  id="first_name"
+                  v-model="register.firstname"
+                  :state="errors.length > 0 ? false:null"
+                  name="register-first-name"
+                  placeholder="John"
+                />
+                <small class="text-danger">{{ errors[0] }}</small>
+              </validation-provider>
+            </b-form-group>
+
+            <!-- last name -->
+            <b-form-group
+              label="Last Name"
+              label-for="last_name"
+            >
+              <validation-provider
+                #default="{ errors }"
+                name="Lastname"
+                rules="required"
+              >
+                <b-form-input
+                  id="last_name"
+                  v-model="register.lastname"
+                  :state="errors.length > 0 ? false:null"
+                  name="register-last-name"
+                  placeholder="Doe"
+                />
+                <small class="text-danger">{{ errors[0] }}</small>
+              </validation-provider>
+            </b-form-group>
+
             <!-- password -->
+            <validation-observer>
             <b-form-group
               label="Password"
               label-for="password"
             >
               <validation-provider
                 #default="{ errors }"
-                name="Password"
-                rules="required"
+                name="password"
+                rules="required"                
               >
                 <b-input-group
                   class="input-group-merge"
@@ -82,11 +125,11 @@
                 >
                   <b-form-input
                     id="password"
-                    v-model="password"
+                    v-model="register.password"
                     :type="passwordFieldType"
                     :state="errors.length > 0 ? false:null"
                     class="form-control-merge"
-                    name="register-password"
+                    name="password"
                     placeholder="············"
                   />
                   <b-input-group-append is-text>
@@ -100,6 +143,42 @@
                 <small class="text-danger">{{ errors[0] }}</small>
               </validation-provider>
             </b-form-group>
+
+            <!-- confirm password -->
+            <b-form-group
+              label="Confirm Password"
+              label-for="confirm_password"
+            >
+              <validation-provider
+                #default="{ errors }"
+                name="confirm"
+                rules="required|password:@password"
+              >
+                <b-input-group
+                  class="input-group-merge"
+                  :class="errors.length > 0 ? 'is-invalid':null"
+                >
+                  <b-form-input
+                    id="confirm_password"
+                    v-model="confirmation"
+                    :type="passwordFieldType"
+                    :state="errors.length > 0 ? false:null"
+                    class="form-control-merge"
+                    name="confirm"
+                    placeholder="············"
+                  />
+                  <b-input-group-append is-text>
+                    <feather-icon
+                      :icon="passwordToggleIcon"
+                      class="cursor-pointer"
+                      @click="togglePasswordVisibility"
+                    />
+                  </b-input-group-append>
+                </b-input-group>
+                <small class="text-danger">{{ errors[0] }}</small>
+              </validation-provider>
+            </b-form-group>
+            </validation-observer>
 
             <!-- checkbox -->
             <b-form-group>
@@ -131,14 +210,14 @@
           </b-link>
         </b-card-text>
 
-        <div class="divider my-2">
+        <!-- <div class="divider my-2">
           <div class="divider-text">
             or
           </div>
-        </div>
+        </div> -->
 
         <!-- social buttons -->
-        <div class="auth-footer-btn d-flex justify-content-center">
+        <!-- <div class="auth-footer-btn d-flex justify-content-center">
           <b-button
             variant="facebook"
             href="javascript:void(0)"
@@ -163,7 +242,7 @@
           >
             <feather-icon icon="GithubIcon" />
           </b-button>
-        </div>
+        </div> -->
       </b-card>
     <!-- /Register v1 -->
     </div>
@@ -190,6 +269,15 @@ import VuexyLogo from '@core/layouts/components/Logo.vue'
 import { required, email } from '@validations'
 import { togglePasswordVisibility } from '@core/mixins/ui/forms'
 import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
+import { extend } from 'vee-validate';
+
+extend('password', {
+  params: ['target'],
+  validate(value, { target }) {
+    return value === target;
+  },
+  message: 'Password does not match'
+});
 
 export default {
   components: {
@@ -213,14 +301,19 @@ export default {
   mixins: [togglePasswordVisibility],
   data() {
     return {
-      regEmail: '',
-      username: '',
-      password: '',
+      register: {
+        email: '',
+        firstname: '',
+        lastname: '',
+        password: '',
+      },
       status: '',
-
+      confirmation: '',
       // validation rules
-      required,
-      email,
+      // required,
+      // email,
+      // 'action':'/createUser',
+      // log : console.log,
     }
   },
   computed: {
@@ -229,19 +322,8 @@ export default {
     },
   },
   methods: {
-    validationForm() {
-      this.$refs.registerForm.validate().then(success => {
-        if (success) {
-          this.$toast({
-            component: ToastificationContent,
-            props: {
-              title: 'Form Submitted',
-              icon: 'EditIcon',
-              variant: 'success',
-            },
-          })
-        }
-      })
+    createUser(register) {
+      this.$store.dispatch('createUser'. register)
     },
   },
 }
