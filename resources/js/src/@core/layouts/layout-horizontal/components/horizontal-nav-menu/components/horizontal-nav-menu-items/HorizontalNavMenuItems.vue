@@ -13,13 +13,10 @@
 </template>
 
 <script>
-import HorizontalNavMenuHeaderLink from '../horizontal-nav-menu-header-link/HorizontalNavMenuHeaderLink.vue'
-import HorizontalNavMenuHeaderGroup from '../horizontal-nav-menu-header-group/HorizontalNavMenuHeaderGroup.vue'
 
 export default {
   components: {
-    HorizontalNavMenuHeaderLink,
-    HorizontalNavMenuHeaderGroup,
+    
   },
   props: {
     items: {
