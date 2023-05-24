@@ -6,35 +6,54 @@ import { canNavigate } from '@/libs/acl/routeProtection'
 import { isUserLoggedIn, getUserData, getHomeRouteForLoggedInUser } from '@/auth/utils'
 import apps from './routes/apps'
 import dashboard from './routes/dashboard'
+import database from './routes/database'
+import document from './routes/document'
 import uiElements from './routes/ui-elements/index'
 import pages from './routes/pages'
 import chartsMaps from './routes/charts-maps'
 import formsTable from './routes/forms-tables'
 import others from './routes/others'
+import matter from './routes/matter'
+import user from './routes/user'
+import upload from './routes/upload'
+import finance from "./routes/finance";
+import mailtrack from './routes/mail-track'
+import report from './routes/report'
+import relevant from './routes/relevant'
+
 
 Vue.use(VueRouter)
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   scrollBehavior() {
-    return { x: 0, y: 0 }
+    return { x: 0, y: 0 };
   },
   routes: [
-    { path: '/', redirect: { name: 'dashboard-ecommerce' } },
+    { path: "/", redirect: { name: "dashboard-new" } },
     ...apps,
     ...dashboard,
     ...pages,
+    ...database,
+    ...document,
     ...chartsMaps,
     ...formsTable,
+    ...matter,
     ...uiElements,
     ...others,
+    ...user,
+    ...upload,
+    ...finance,
+    ...mailtrack,
+    ...report,
+    ...relevant,
     {
-      path: '*',
-      redirect: 'error-404',
-    },
-  ],
-})
+      path: "*",
+      redirect: "error-404"
+    }
+  ]
+});
 
 router.beforeEach((to, _, next) => {
   const isLoggedIn = isUserLoggedIn()

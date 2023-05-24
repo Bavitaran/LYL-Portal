@@ -4,6 +4,7 @@ export default [
     name: 'forms-element-select',
     component: () => import('@/views/forms/form-element/form-select/FormSelect.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Select',
       breadcrumb: [
         {
@@ -21,6 +22,7 @@ export default [
     name: 'forms-element-switch',
     component: () => import('@/views/forms/form-element/form-switch/Switch.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Switch',
       breadcrumb: [
         {
@@ -38,6 +40,7 @@ export default [
     name: 'forms-element-checkbox',
     component: () => import('@/views/forms/form-element/form-checkbox/FormCheckbox.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Checkbox',
       breadcrumb: [
         {
@@ -55,6 +58,7 @@ export default [
     name: 'forms-element-radio',
     component: () => import('@/views/forms/form-element/form-radio/FormRadio.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Radio',
       breadcrumb: [
         {
@@ -72,6 +76,7 @@ export default [
     name: 'forms-element-input',
     component: () => import('@/views/forms/form-element/form-input/FormInput.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Input',
       breadcrumb: [
         {
@@ -89,6 +94,7 @@ export default [
     name: 'forms-element-textarea',
     component: () => import('@/views/forms/form-element/form-textarea/FormTextArea.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Textarea',
       breadcrumb: [
         {
@@ -106,6 +112,7 @@ export default [
     name: 'forms-element-spinbutton',
     component: () => import('@/views/forms/form-element/form-spinbutton/FormSpinbutton.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Spinbutton',
       breadcrumb: [
         {
@@ -123,6 +130,7 @@ export default [
     name: 'forms-element-input-group',
     component: () => import('@/views/forms/form-element/form-input-group/FormInputGroup.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Input Group',
       breadcrumb: [
         {
@@ -140,6 +148,7 @@ export default [
     name: 'forms-element-rating',
     component: () => import('@/views/forms/form-element/form-rating/FormRating.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Form Rating',
       breadcrumb: [
         {
@@ -157,6 +166,7 @@ export default [
     name: 'forms-element-tag',
     component: () => import('@/views/forms/form-element/form-tag/FormTag.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Form Tag',
       breadcrumb: [
         {
@@ -174,6 +184,7 @@ export default [
     name: 'forms-element-datepicker',
     component: () => import('@/views/forms/form-element/form-datepicker/FormDatepicker.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Form Datepicker',
       breadcrumb: [
         {
@@ -191,6 +202,7 @@ export default [
     name: 'forms-element-timepicker',
     component: () => import('@/views/forms/form-element/form-timepicker/FormTimepicker.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Form Timepicker',
       breadcrumb: [
         {
@@ -208,6 +220,7 @@ export default [
     name: 'forms-element-file-input',
     component: () => import('@/views/forms/form-element/form-file-input/FileInput.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'File Input',
       breadcrumb: [
         {
@@ -225,6 +238,7 @@ export default [
     name: 'extensions-auto-suggest',
     component: () => import('@/views/forms/form-element/autosuggest/AutoSuggest.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Auto Suggest',
       breadcrumb: [
         {
@@ -242,6 +256,7 @@ export default [
     name: 'extensions-vue-select',
     component: () => import('@/views/forms/form-element/vue-select/VueSelect.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Vue Select',
       breadcrumb: [
         {
@@ -259,6 +274,7 @@ export default [
     name: 'extensions-quill-editor',
     component: () => import('@/views/forms/form-element/quill-editor/QuillEditor.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Quill Editor',
       breadcrumb: [
         {
@@ -277,6 +293,7 @@ export default [
     name: 'extensions-date-time-picker',
     component: () => import('@/views/forms/form-element/date-time-picker/DateTimePicker.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Date Time Picker',
       breadcrumb: [
         {
@@ -294,6 +311,7 @@ export default [
     name: 'forms-element-input-mask',
     component: () => import('@/views/forms/form-element/form-input-mask/FormInputMask.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Input Mask',
       breadcrumb: [
         {
@@ -311,6 +329,7 @@ export default [
     name: 'form-layout',
     component: () => import('@/views/forms/form-layout/FormLayout.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Form Layout',
       breadcrumb: [
         {
@@ -328,6 +347,7 @@ export default [
     name: 'form-wizard',
     component: () => import('@/views/forms/form-wizard/FormWizard.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Form Wizard',
       breadcrumb: [
         {
@@ -345,6 +365,7 @@ export default [
     name: 'form-validation',
     component: () => import('@/views/forms/form-validation/FormValidation.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Form Validation',
       breadcrumb: [
         {
@@ -362,6 +383,7 @@ export default [
     name: 'form-repeater',
     component: () => import('@/views/forms/form-repeater/FormRepeater.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Form Repeater',
       breadcrumb: [
         {
@@ -379,6 +401,7 @@ export default [
     name: 'table-bs-table',
     component: () => import('@/views/table/bs-table/Table.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'BS Table',
       breadcrumb: [
         {
@@ -396,6 +419,7 @@ export default [
     name: 'table-good-table',
     component: () => import('@/views/table/vue-good-table/GoodTable.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Good Table',
       breadcrumb: [
         {

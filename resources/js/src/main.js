@@ -11,7 +11,8 @@ import App from './App.vue'
 import './global-components'
 
 // 3rd party plugins
-import '@axios'
+import axios from 'axios'
+import VueAxios from "vue-axios";
 import '@/libs/acl'
 import '@/libs/portal-vue'
 import '@/libs/clipboard'
@@ -20,12 +21,14 @@ import '@/libs/sweet-alerts'
 import '@/libs/vue-select'
 import '@/libs/tour'
 
-// Axios Mock Adapter
-import '@/@fake-db/db'
+// // Axios Mock Adapter
+// import '@/@fake-db/db'
+// Vue.prototype.$http = axios;
 
 // BSV Plugin Registration
 Vue.use(ToastPlugin)
 Vue.use(ModalPlugin)
+Vue.use(VueAxios, axios);
 
 // Composition API
 Vue.use(VueCompositionAPI)

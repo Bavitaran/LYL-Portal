@@ -1,6 +1,89 @@
 <template>
-  <section class="invoice-add-wrapper">
-    <!-- Alert: No item found -->
+<div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Update Invoice</h4>
+                </div>
+                <div class="card-body">
+                    <form @submit.prevent="update">
+                        <div class="row">
+                            <div class="col-12 mb-2">
+                                <div class="form-group">
+                                    <label>Date</label>
+                                    <input type="text" class="form-control" v-model="invoice.date">
+                                </div>
+                            </div>
+                            <div class="col-12 mb-2">
+                                <div class="form-group">
+                                    <label>due_date</label>
+                                    <input type="text" class="form-control" v-model="invoice.due_date">
+                                </div>
+                            </div>
+                            <div class="col-12 mb-2">
+                                <div class="form-group">
+                                    <label>invoice_to</label>
+                                    <input type="text" class="form-control" v-model="invoice.invoice_to">
+                                </div>
+                            </div>
+                            <div class="col-12 mb-2">
+                                <div class="form-group">
+                                    <label>item</label>
+                                    <input type="text" class="form-control" v-model="invoice.item">
+                                </div>
+                            </div>
+                            <div class="col-12 mb-2">
+                                <div class="form-group">
+                                    <label>cost</label>
+                                    <input type="text" class="form-control" v-model="invoice.cost">
+                                </div>
+                            </div>
+                            <div class="col-12 mb-2">
+                                <div class="form-group">
+                                    <label>quantity</label>
+                                    <input type="text" class="form-control" v-model="invoice.quantity">
+                                </div>
+                            </div>
+                            <div class="col-12 mb-2">
+                                <div class="form-group">
+                                    <label>price</label>
+                                    <input type="text" class="form-control" v-model="invoice.price">
+                                </div>
+                            </div>
+                            <div class="col-12 mb-2">
+                                <div class="form-group">
+                                    <label>description</label>
+                                    <input type="text" class="form-control" v-model="invoice.description">
+                                </div>
+                            </div>
+                            <div class="col-12 mb-2">
+                                <div class="form-group">
+                                    <label>sales_person</label>
+                                    <input type="text" class="form-control" v-model="invoice.sales_person">
+                                </div>
+                            </div>
+                            <div class="col-12 mb-2">
+                                <div class="form-group">
+                                    <label>note</label>
+                                    <input type="text" class="form-control" v-model="invoice.note">
+                                </div>
+                            </div>
+                            <div class="col-12 mb-2">
+                                <div class="form-group">
+                                    <label>payment_method</label>
+                                    <input type="text" class="form-control" v-model="invoice.payment_method">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  <!-- <section class="invoice-add-wrapper">
     <b-alert
       variant="danger"
       :show="invoiceData === undefined"
@@ -25,7 +108,6 @@
       class="invoice-add"
     >
 
-      <!-- Col: Left (Invoice Container) -->
       <b-col
         cols="12"
         xl="9"
@@ -36,12 +118,10 @@
             no-body
             class="invoice-preview-card"
           >
-            <!-- Header -->
             <b-card-body class="invoice-padding pb-0">
 
               <div class="d-flex justify-content-between flex-md-row flex-column invoice-spacing mt-0">
 
-                <!-- Header: Left Content -->
                 <div>
                   <div class="logo-wrapper">
                     <logo />
@@ -60,7 +140,6 @@
                   </b-card-text>
                 </div>
 
-                <!-- Header: Right Content -->
                 <div class="invoice-number-date mt-md-0 mt-2">
                   <div class="d-flex align-items-center justify-content-md-end mb-1">
                     <h4 class="invoice-title">
@@ -99,16 +178,13 @@
               </div>
             </b-card-body>
 
-            <!-- Spacer -->
             <hr class="invoice-spacing">
 
-            <!-- Invoice Client & Payment Details -->
             <b-card-body
               class="invoice-padding pt-0"
             >
               <b-row class="invoice-spacing">
 
-                <!-- Col: Invoice To -->
                 <b-col
                   cols="12"
                   xl="6"
@@ -118,7 +194,6 @@
                     Invoice To:
                   </h6>
 
-                  <!-- Selected Client -->
                   <div
                     v-if="invoiceData.client"
                     class="mt-1"
@@ -141,7 +216,6 @@
                   </div>
                 </b-col>
 
-                <!-- Col: Payment Details -->
                 <b-col
                   xl="6"
                   cols="12"
@@ -190,7 +264,6 @@
               </b-row>
             </b-card-body>
 
-            <!-- Items Section -->
             <b-card-body class="invoice-padding form-item-section">
               <div
                 ref="form"
@@ -204,14 +277,10 @@
                   class="pb-2"
                 >
 
-                  <!-- Item Form -->
-                  <!-- ? This will be in loop => So consider below markup for single item -->
                   <b-col cols="12">
 
-                    <!-- ? Flex to keep separate width for XIcon and SettingsIcon -->
                     <div class="d-none d-lg-flex">
                       <b-row class="flex-grow-1 px-1">
-                        <!-- Single Item Form Headers -->
                         <b-col
                           cols="12"
                           lg="5"
@@ -240,11 +309,8 @@
                       <div class="form-item-action-col" />
                     </div>
 
-                    <!-- Form Input Fields OR content inside bordered area  -->
-                    <!-- ? Flex to keep separate width for XIcon and SettingsIcon -->
                     <div class="d-flex border rounded">
                       <b-row class="flex-grow-1 p-2">
-                        <!-- Single Item Form Headers -->
                         <b-col
                           cols="12"
                           lg="5"
@@ -322,7 +388,6 @@
                           class="cursor-pointer"
                         />
 
-                        <!-- Setting Item Form -->
                         <b-popover
                           :ref="`form-item-settings-popover-${index}`"
                           :target="`form-item-settings-icon-${index}`"
@@ -332,7 +397,6 @@
                           <b-form @submit.prevent>
                             <b-row>
 
-                              <!-- Field: Discount -->
                               <b-col cols="12">
                                 <b-form-group
                                   label="Discount(%)"
@@ -346,7 +410,6 @@
                                 </b-form-group>
                               </b-col>
 
-                              <!-- Field: Tax 1 -->
                               <b-col cols="6">
                                 <b-form-group
                                   label="Tax 1"
@@ -362,7 +425,6 @@
                                 </b-form-group>
                               </b-col>
 
-                              <!-- Field: Tax 2 -->
                               <b-col cols="6">
                                 <b-form-group
                                   label="Tax 2"
@@ -413,11 +475,9 @@
               </b-button>
             </b-card-body>
 
-            <!-- Invoice Description: Total -->
             <b-card-body class="invoice-padding pb-0">
               <b-row>
 
-                <!-- Col: Sales Persion -->
                 <b-col
                   cols="12"
                   md="6"
@@ -436,7 +496,6 @@
                   />
                 </b-col>
 
-                <!-- Col: Total -->
                 <b-col
                   cols="12"
                   md="6"
@@ -483,10 +542,8 @@
               </b-row>
             </b-card-body>
 
-            <!-- Spacer -->
             <hr class="invoice-spacing">
 
-            <!-- Note -->
             <b-card-body class="invoice-padding pt-0">
               <span class="font-weight-bold">Note: </span>
               <b-form-textarea v-model="invoiceData.note" />
@@ -495,7 +552,6 @@
         </b-form>
       </b-col>
 
-      <!-- Right Col: Card -->
       <b-col
         cols="12"
         md="4"
@@ -503,10 +559,8 @@
         class="invoice-actions"
       >
 
-        <!-- Action Buttons -->
         <b-card>
 
-          <!-- Button: Send Invoice -->
           <b-button
             v-ripple.400="'rgba(255, 255, 255, 0.15)'"
             v-b-toggle.sidebar-send-invoice
@@ -517,7 +571,6 @@
             Send Invoice
           </b-button>
 
-          <!-- Button: DOwnload -->
           <b-button
             v-ripple.400="'rgba(113, 102, 240, 0.15)'"
             variant="outline-primary"
@@ -527,7 +580,6 @@
             Preview
           </b-button>
 
-          <!-- Button: Print -->
           <b-button
             v-ripple.400="'rgba(113, 102, 240, 0.15)'"
             variant="outline-primary"
@@ -536,7 +588,6 @@
             Save
           </b-button>
 
-          <!-- Button: Add Payment -->
           <b-button
             v-b-toggle.sidebar-invoice-add-payment
             v-ripple.400="'rgba(255, 255, 255, 0.15)'"
@@ -548,7 +599,6 @@
           </b-button>
         </b-card>
 
-        <!-- Payment Method -->
         <div class="mt-2">
           <b-form-group
             label="Accept Payment Via"
@@ -564,9 +614,7 @@
             />
           </b-form-group>
 
-          <!-- ? Below values are not adding invoiceData to keep invoiceData more generic and less confusing  -->
 
-          <!-- Payment Terms -->
           <div class="d-flex justify-content-between align-items-center">
             <label for="patymentTerms">Payment Terms</label>
             <b-form-checkbox
@@ -576,7 +624,6 @@
             />
           </div>
 
-          <!-- Client Notes -->
           <div class="d-flex justify-content-between align-items-center my-1">
             <label for="clientNotes">Client Notes</label>
             <b-form-checkbox
@@ -586,7 +633,6 @@
             />
           </div>
 
-          <!-- Payment Stub -->
           <div class="d-flex justify-content-between align-items-center">
             <label for="paymentStub">Payment Stub</label>
             <b-form-checkbox
@@ -600,7 +646,7 @@
 
     <invoice-sidebar-send-invoice />
     <invoice-sidebar-add-payment />
-  </section>
+  </section> -->
 </template>
 
 <script>
@@ -636,6 +682,24 @@ import InvoiceSidebarSendInvoice from '../InvoiceSidebarSendInvoice.vue'
 import InvoiceSidebarAddPayment from '../InvoiceSidebarAddPayment.vue'
 
 export default {
+    name:"update-invoice",
+    data(){
+        return {
+            invoice:{
+                date:"",
+                due_date:"",
+                invoice_to:"",
+                item:"",
+                cost:"",
+                price:"",
+                description:"",
+                sales_person:"",
+                note:"",
+                payment_method:"",
+                _method:"patch"
+            }
+        }
+    },
   components: {
     BRow,
     BCol,
@@ -673,7 +737,8 @@ export default {
     },
   },
   mounted() {
-    this.initTrHeight()
+    this.initTrHeight(),
+    this.showInvoice()
   },
   created() {
     window.addEventListener('resize', this.initTrHeight)
@@ -682,6 +747,33 @@ export default {
     window.removeEventListener('resize', this.initTrHeight)
   },
   methods: {
+      async showInvoice(){
+            await this.axios.get(`/api/auth/invoice/${this.$route.params.id}`).then(response=>{
+                const { date, due_date, invoice_to, item, cost, quantity, price, description, sales_person, note, payment_method } = response.data
+                this.invoice.date = date
+                this.invoice.due_date = due_date
+                this.invoice.invoice_to = invoice_to
+                this.invoice.item = item
+                this.invoice.cost = cost
+                this.invoice.quantity = quantity
+                this.invoice.price = price
+                this.invoice.description = description
+                this.invoice.sales_person = sales_person
+                this.invoice.note = note
+                this.invoice.payment_method = payment_method
+            }).catch(error=>{
+                console.log(error)
+            })
+        },
+        async update(){
+            await this.axios.post(`/api/auth/invoice/${this.$route.params.id}`,this.invoice).then(response=>{
+                this.$router.push({name:"apps-invoice-list"})
+            }).catch(error=>{
+                console.log(error)
+            })
+        },
+
+
     addNewItemInItemForm() {
       this.$refs.form.style.overflow = 'hidden'
       this.invoiceData.items.push(JSON.parse(JSON.stringify(this.itemFormBlankItem)))
