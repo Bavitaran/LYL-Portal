@@ -3,13 +3,8 @@
     v-if="$route.meta.breadcrumb || $route.meta.pageTitle"
     class="content-header"
   >
-
     <!-- Content Left -->
-    <b-col
-      class="content-header-left mb-2"
-      cols="12"
-      md="9"
-    >
+    <b-col class="content-header-left mb-2" cols="12" md="9">
       <b-row class="breadcrumbs-top">
         <b-col cols="12">
           <h2 class="content-header-title float-left pr-1 mb-0">
@@ -39,7 +34,7 @@
     </b-col>
 
     <!-- Content Right -->
-    <b-col
+    <!-- <b-col
       class="content-header-right text-md-right d-md-block d-none mb-1"
       md="3"
       cols="12"
@@ -93,18 +88,26 @@
           <span class="align-middle ml-50">Calendar</span>
         </b-dropdown-item>
       </b-dropdown>
-    </b-col>
+    </b-col> -->
   </b-row>
 </template>
 
 <script>
-import { BBreadcrumb, BBreadcrumbItem, BRow, BCol, BDropdown, BDropdownItem, BButton } from 'bootstrap-vue'
-import Ripple from 'vue-ripple-directive'
-import { useUtils as useI18nUtils } from '@core/libs/i18n'
+import {
+  BBreadcrumb,
+  BBreadcrumbItem,
+  BRow,
+  BCol,
+  BDropdown,
+  BDropdownItem,
+  BButton
+} from "bootstrap-vue";
+import Ripple from "vue-ripple-directive";
+import { useUtils as useI18nUtils } from "@core/libs/i18n";
 
 export default {
   directives: {
-    Ripple,
+    Ripple
   },
   components: {
     BBreadcrumb,
@@ -113,15 +116,15 @@ export default {
     BCol,
     BDropdown,
     BDropdownItem,
-    BButton,
+    BButton
   },
   setup() {
-    const { t } = useI18nUtils()
+    const { t } = useI18nUtils();
 
     return {
       // i18n
-      t,
-    }
-  },
-}
+      t
+    };
+  }
+};
 </script>

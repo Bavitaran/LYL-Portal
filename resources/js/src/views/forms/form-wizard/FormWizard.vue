@@ -10,11 +10,11 @@
 </template>
 
 <script>
-import { BRow, BCol } from 'bootstrap-vue'
-import FormWizardNumber from './FormWizardNumber.vue'
-import FormWizardIcon from './FormWizardIcon.vue'
-import FormWizardVertical from './FormWizardVertical.vue'
-import FormWizardVerticalIcon from './FormWizardVerticalIcon.vue'
+import { BRow, BCol } from "bootstrap-vue";
+import FormWizardNumber from "./FormWizardNumber.vue";
+import FormWizardIcon from "./FormWizardIcon.vue";
+import FormWizardVertical from "./FormWizardVertical.vue";
+import FormWizardVerticalIcon from "./FormWizardVerticalIcon.vue";
 
 export default {
   components: {
@@ -23,12 +23,12 @@ export default {
     FormWizardNumber,
     FormWizardIcon,
     FormWizardVertical,
-    FormWizardVerticalIcon,
-  },
-}
+    FormWizardVerticalIcon
+  }
+};
 </script>
 
 <style lang="scss">
-@import '~@core/scss/vue/libs/vue-wizard.scss';
-@import '~@core/scss/vue/libs/vue-select.scss';
+@import "~@core/scss/vue/libs/vue-wizard.scss";
+@import "~@core/scss/vue/libs/vue-select.scss";
 </style>

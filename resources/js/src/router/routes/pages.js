@@ -118,7 +118,6 @@ export default [
     component: () => import('@/views/pages/miscellaneous/NotAuthorized.vue'),
     meta: {
       layout: 'full',
-      resource: 'Auth',
     },
   },
   {
@@ -142,6 +141,7 @@ export default [
     name: 'pages-account-setting',
     component: () => import('@/views/pages/account-setting/AccountSetting.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Account Settings',
       breadcrumb: [
         {
@@ -155,20 +155,34 @@ export default [
     },
   },
   {
-    path: '/pages/profile',
+    path: '/profile',
     name: 'pages-profile',
-    component: () => import('@/views/pages/profile/Profile.vue'),
+    component: () => import('@/views/pages/account-setting/AccountSetting.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Profile',
       breadcrumb: [
-        {
-          text: 'Pages',
-        },
         {
           text: 'Profile',
           active: true,
         },
       ],
+    },
+  },
+  {
+    path: '/add-bank-account',
+    name: 'add-bank-account',
+    component: () => import('@/views/pages/account-setting/AddBankAccount.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/edit-bank-account',
+    name: 'edit-bank-account',
+    component: () => import('@/views/pages/account-setting/EditBankAccount.vue'),
+    meta: {
+      requiresAuth: true,
     },
   },
 
@@ -177,6 +191,7 @@ export default [
     name: 'pages-faq',
     component: () => import('@/views/pages/faq/Faq.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'FAQ',
       breadcrumb: [
         {
@@ -194,6 +209,7 @@ export default [
     name: 'pages-knowledge-base',
     component: () => import('@/views/pages/Knowledge-base/KnowledgeBase.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Knowledge Base',
       breadcrumb: [
         {
@@ -211,6 +227,7 @@ export default [
     name: 'pages-knowledge-base-category',
     component: () => import('@/views/pages/Knowledge-base/KnowledgeBaseCategory.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Category',
       breadcrumb: [
         {
@@ -233,6 +250,7 @@ export default [
     name: 'pages-knowledge-base-question',
     component: () => import('@/views/pages/Knowledge-base/KnowledgeBaseCategoryQuestion.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Question',
       breadcrumb: [
         {
@@ -258,12 +276,14 @@ export default [
     path: '/pages/pricing',
     name: 'pages-pricing',
     component: () => import('@/views/pages/pricing/Pricing.vue'),
+    meta: { requiresAuth: true }
   },
   {
     path: '/pages/blog/list',
     name: 'pages-blog-list',
     component: () => import('@/views/pages/blog/BlogList.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Blog List',
       breadcrumb: [
         {
@@ -284,6 +304,7 @@ export default [
     name: 'pages-blog-detail',
     component: () => import('@/views/pages/blog/BlogDetail.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Blog Detail',
       breadcrumb: [
         {
@@ -304,6 +325,7 @@ export default [
     name: 'pages-blog-edit',
     component: () => import('@/views/pages/blog/BlogEdit.vue'),
     meta: {
+      requiresAuth: true,
       pageTitle: 'Blog Edit',
       breadcrumb: [
         {

@@ -1,6 +1,6 @@
 <template>
   <div>
-
+      <form @submit.prevent="update">
     <!-- Media -->
     <b-media class="mb-2">
       <template #aside>
@@ -17,167 +17,84 @@
         {{ userData.fullName }}
       </h4>
       <div class="d-flex flex-wrap">
-        <b-button
-          variant="primary"
-          @click="$refs.refInputEl.click()"
-        >
+        <b-button variant="primary" @click="$refs.refInputEl.click()">
           <input
             ref="refInputEl"
             type="file"
             class="d-none"
             @input="inputImageRenderer"
-          >
+          />
           <span class="d-none d-sm-inline">Update</span>
-          <feather-icon
-            icon="EditIcon"
-            class="d-inline d-sm-none"
-          />
+          <feather-icon icon="EditIcon" class="d-inline d-sm-none" />
         </b-button>
-        <b-button
-          variant="outline-secondary"
-          class="ml-1"
-        >
+        <b-button variant="outline-secondary" class="ml-1">
           <span class="d-none d-sm-inline">Remove</span>
-          <feather-icon
-            icon="TrashIcon"
-            class="d-inline d-sm-none"
-          />
+          <feather-icon icon="TrashIcon" class="d-inline d-sm-none" />
         </b-button>
       </div>
     </b-media>
 
-    <!-- User Info: Input Fields -->
-    <b-form>
-      <b-row>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
 
-        <!-- Field: Username -->
-        <b-col
-          cols="12"
-          md="4"
-        >
-          <b-form-group
-            label="Username"
-            label-for="username"
-          >
-            <b-form-input
-              id="username"
-              v-model="userData.username"
-            />
-          </b-form-group>
-        </b-col>
+                        <div class="row">
+                            <div class="col-4 mb-2">
+                                <div class="form-group">
+                                    <label>Full Name</label>
+                                    <input type="text" class="form-control" v-model="user.fullname">
+                                </div>
+                            </div>
+                            <div class="col-4 mb-2">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="text" class="form-control" v-model="user.email">
+                                </div>
+                            </div>
+                            <div class="col-4 mb-2">
+                                <div class="form-group">
+                                    <label>Mobile Number</label>
+                                    <input type="text" class="form-control" v-model="user.mobile_number">
+                                </div>
+                            </div>
+                            <div class="col-4 mb-2">
+                                <div class="form-group">
+                                    <label>IC Number</label>
+                                    <input type="text" class="form-control" v-model="user.ic_number">
+                                </div>
+                            </div>
+                            <div class="col-4 mb-2">
+                                <div class="form-group">
+                                    <label>Company Name</label>
+                                    <input type="text" class="form-control" v-model="user.company_name">
+                                </div>
+                            </div>
+                            <div class="col-4 mb-2">
+                                <div class="form-group">
+                                    <label>Role ID</label>
+                                    <input type="text" class="form-control" v-model="user.roles_id">
+                                </div>
+                            </div>
 
-        <!-- Field: Full Name -->
-        <b-col
-          cols="12"
-          md="4"
-        >
-          <b-form-group
-            label="Name"
-            label-for="full-name"
-          >
-            <b-form-input
-              id="full-name"
-              v-model="userData.fullName"
-            />
-          </b-form-group>
-        </b-col>
 
-        <!-- Field: Email -->
-        <b-col
-          cols="12"
-          md="4"
-        >
-          <b-form-group
-            label="Email"
-            label-for="email"
-          >
-            <b-form-input
-              id="email"
-              v-model="userData.email"
-              type="email"
-            />
-          </b-form-group>
-        </b-col>
+                        </div>
 
-        <!-- Field: Status -->
-        <b-col
-          cols="12"
-          md="4"
-        >
-          <b-form-group
-            label="Status"
-            label-for="user-status"
-          >
-            <v-select
-              v-model="userData.status"
-              :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
-              :options="statusOptions"
-              :reduce="val => val.value"
-              :clearable="false"
-              input-id="user-status"
-            />
-          </b-form-group>
-        </b-col>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <!-- Field: Role -->
-        <b-col
-          cols="12"
-          md="4"
-        >
-          <b-form-group
-            label="User Role"
-            label-for="user-role"
-          >
-            <v-select
-              v-model="userData.role"
-              :dir="$store.state.appConfig.isRTL ? 'rtl' : 'ltr'"
-              :options="roleOptions"
-              :reduce="val => val.value"
-              :clearable="false"
-              input-id="user-role"
-            />
-          </b-form-group>
-        </b-col>
-
-        <!-- Field: Email -->
-        <b-col
-          cols="12"
-          md="4"
-        >
-          <b-form-group
-            label="Company"
-            label-for="company"
-          >
-            <b-form-input
-              id="company"
-              v-model="userData.company"
-            />
-          </b-form-group>
-        </b-col>
-
-      </b-row>
-    </b-form>
 
     <!-- PERMISSION TABLE -->
-    <b-card
-      no-body
-      class="border mt-1"
-    >
+    <b-card no-body class="border mt-1">
       <b-card-header class="p-1">
         <b-card-title class="font-medium-2">
-          <feather-icon
-            icon="LockIcon"
-            size="18"
-          />
+          <feather-icon icon="LockIcon" size="18" />
           <span class="align-middle ml-50">Permission</span>
         </b-card-title>
       </b-card-header>
-      <b-table
-        striped
-        responsive
-        class="mb-0"
-        :items="permissionsData"
-      >
+      <b-table striped responsive class="mb-0" :items="permissionsData">
         <template #cell(module)="data">
           {{ data.value }}
         </template>
@@ -189,6 +106,7 @@
 
     <!-- Action Buttons -->
     <b-button
+     type="submit"
       variant="primary"
       class="mb-1 mb-sm-0 mr-0 mr-sm-1"
       :block="$store.getters['app/currentBreakPoint'] === 'xs'"
@@ -202,7 +120,9 @@
     >
       Reset
     </b-button>
+</form>
   </div>
+
 </template>
 
 <script>
@@ -219,15 +139,29 @@ import {
   BCard,
   BCardHeader,
   BCardTitle,
-  BFormCheckbox,
-} from 'bootstrap-vue'
-import { avatarText } from '@core/utils/filter'
-import vSelect from 'vue-select'
-import { useInputImageRenderer } from '@core/comp-functions/forms/form-utils'
-import { ref } from '@vue/composition-api'
-import useUsersList from '../users-list/useUsersList'
+  BFormCheckbox
+} from "bootstrap-vue";
+import { avatarText } from "@core/utils/filter";
+import vSelect from "vue-select";
+import { useInputImageRenderer } from "@core/comp-functions/forms/form-utils";
+import { ref } from "@vue/composition-api";
+import useUsersList from "../users-list/useUsersList";
 
 export default {
+  name: "update-user",
+  data() {
+    return {
+      user: {
+        roles_id: "",
+        fullname: "",
+        email: "",
+        mobile_number: "",
+        company_name: "",
+        ic_number: "",
+        _method: "patch"
+      }
+    };
+  },
   components: {
     BButton,
     BMedia,
@@ -242,77 +176,118 @@ export default {
     BCardHeader,
     BCardTitle,
     BFormCheckbox,
-    vSelect,
+    vSelect
   },
   props: {
     userData: {
       type: Object,
-      required: true,
+      required: true
+    }
+  },
+  mounted() {
+    this.showUser();
+  },
+  methods: {
+    async showUser() {
+      await this.axios
+        .get(`/api/auth/users/${this.$route.params.id}`)
+        .then((response) => {
+          const {
+            fullname,
+            roles_id,
+            email,
+            mobile_number,
+            company_name,
+            ic_number
+          } = response.data;
+          this.user.fullname = fullname;
+          this.user.roles_id = roles_id;
+          this.user.email = email;
+          this.user.mobile_number = mobile_number;
+          this.user.company_name = company_name;
+          this.user.ic_number = ic_number;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
+    async update() {
+      await this.axios
+        .post(`/api/auth/users/${this.$route.params.id}`, this.user)
+        .then((response) => {
+          this.$router.push({ name: "apps-users-list" });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   },
   setup(props) {
-    const { resolveUserRoleVariant } = useUsersList()
+    const { resolveUserRoleVariant } = useUsersList();
 
     const roleOptions = [
-      { label: 'Admin', value: 'admin' },
-      { label: 'Author', value: 'author' },
-      { label: 'Editor', value: 'editor' },
-      { label: 'Maintainer', value: 'maintainer' },
-      { label: 'Subscriber', value: 'subscriber' },
-    ]
+      { label: "Admin", value: "admin" },
+      { label: "Author", value: "author" },
+      { label: "Editor", value: "editor" },
+      { label: "Maintainer", value: "maintainer" },
+      { label: "Subscriber", value: "subscriber" }
+    ];
 
     const statusOptions = [
-      { label: 'Pending', value: 'pending' },
-      { label: 'Active', value: 'active' },
-      { label: 'Inactive', value: 'inactive' },
-    ]
+      { label: "Pending", value: "pending" },
+      { label: "Active", value: "active" },
+      { label: "Inactive", value: "inactive" }
+    ];
 
     const permissionsData = [
       {
-        module: 'Admin',
+        module: "Admin",
         read: true,
         write: false,
         create: false,
-        delete: false,
+        delete: false
       },
       {
-        module: 'Staff',
+        module: "Staff",
         read: false,
         write: true,
         create: false,
-        delete: false,
+        delete: false
       },
       {
-        module: 'Author',
+        module: "Author",
         read: true,
         write: false,
         create: true,
-        delete: false,
+        delete: false
       },
       {
-        module: 'Contributor',
+        module: "Contributor",
         read: false,
         write: false,
         create: false,
-        delete: false,
+        delete: false
       },
       {
-        module: 'User',
+        module: "User",
         read: false,
         write: false,
         create: false,
-        delete: true,
-      },
-    ]
+        delete: true
+      }
+    ];
 
     // ? Demo Purpose => Update image on click of update
-    const refInputEl = ref(null)
-    const previewEl = ref(null)
+    const refInputEl = ref(null);
+    const previewEl = ref(null);
 
-    const { inputImageRenderer } = useInputImageRenderer(refInputEl, base64 => {
-      // eslint-disable-next-line no-param-reassign
-      props.userData.avatar = base64
-    })
+    const { inputImageRenderer } = useInputImageRenderer(
+      refInputEl,
+      (base64) => {
+        // eslint-disable-next-line no-param-reassign
+        props.userData.avatar = base64;
+      }
+    );
 
     return {
       resolveUserRoleVariant,
@@ -324,12 +299,12 @@ export default {
       //  ? Demo - Update Image on click of update button
       refInputEl,
       previewEl,
-      inputImageRenderer,
-    }
-  },
-}
+      inputImageRenderer
+    };
+  }
+};
 </script>
 
 <style lang="scss">
-@import '~@core/scss/vue/libs/vue-select.scss';
+@import "~@core/scss/vue/libs/vue-select.scss";
 </style>

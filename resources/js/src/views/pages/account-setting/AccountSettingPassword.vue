@@ -5,10 +5,7 @@
       <b-row>
         <!-- old password -->
         <b-col md="6">
-          <b-form-group
-            label="Old Password"
-            label-for="account-old-password"
-          >
+          <b-form-group label="Old Password" label-for="account-old-password">
             <b-input-group class="input-group-merge">
               <b-form-input
                 id="account-old-password"
@@ -32,10 +29,7 @@
       <b-row>
         <!-- new password -->
         <b-col md="6">
-          <b-form-group
-            label-for="account-new-password"
-            label="New Password"
-          >
+          <b-form-group label-for="account-new-password" label="New Password">
             <b-input-group class="input-group-merge">
               <b-form-input
                 id="account-new-password"
@@ -108,9 +102,17 @@
 
 <script>
 import {
-  BButton, BForm, BFormGroup, BFormInput, BRow, BCol, BCard, BInputGroup, BInputGroupAppend,
-} from 'bootstrap-vue'
-import Ripple from 'vue-ripple-directive'
+  BButton,
+  BForm,
+  BFormGroup,
+  BFormInput,
+  BRow,
+  BCol,
+  BCard,
+  BInputGroup,
+  BInputGroupAppend
+} from "bootstrap-vue";
+import Ripple from "vue-ripple-directive";
 
 export default {
   components: {
@@ -122,42 +124,51 @@ export default {
     BCol,
     BCard,
     BInputGroup,
-    BInputGroupAppend,
+    BInputGroupAppend
   },
   directives: {
-    Ripple,
+    Ripple
   },
   data() {
     return {
-      passwordValueOld: '',
-      newPasswordValue: '',
-      RetypePassword: '',
-      passwordFieldTypeOld: 'password',
-      passwordFieldTypeNew: 'password',
-      passwordFieldTypeRetype: 'password',
-    }
+      passwordValueOld: "",
+      newPasswordValue: "",
+      RetypePassword: "",
+      passwordFieldTypeOld: "password",
+      passwordFieldTypeNew: "password",
+      passwordFieldTypeRetype: "password"
+    };
   },
   computed: {
     passwordToggleIconOld() {
-      return this.passwordFieldTypeOld === 'password' ? 'EyeIcon' : 'EyeOffIcon'
+      return this.passwordFieldTypeOld === "password"
+        ? "EyeIcon"
+        : "EyeOffIcon";
     },
     passwordToggleIconNew() {
-      return this.passwordFieldTypeNew === 'password' ? 'EyeIcon' : 'EyeOffIcon'
+      return this.passwordFieldTypeNew === "password"
+        ? "EyeIcon"
+        : "EyeOffIcon";
     },
     passwordToggleIconRetype() {
-      return this.passwordFieldTypeRetype === 'password' ? 'EyeIcon' : 'EyeOffIcon'
-    },
+      return this.passwordFieldTypeRetype === "password"
+        ? "EyeIcon"
+        : "EyeOffIcon";
+    }
   },
   methods: {
     togglePasswordOld() {
-      this.passwordFieldTypeOld = this.passwordFieldTypeOld === 'password' ? 'text' : 'password'
+      this.passwordFieldTypeOld =
+        this.passwordFieldTypeOld === "password" ? "text" : "password";
     },
     togglePasswordNew() {
-      this.passwordFieldTypeNew = this.passwordFieldTypeNew === 'password' ? 'text' : 'password'
+      this.passwordFieldTypeNew =
+        this.passwordFieldTypeNew === "password" ? "text" : "password";
     },
     togglePasswordRetype() {
-      this.passwordFieldTypeRetype = this.passwordFieldTypeRetype === 'password' ? 'text' : 'password'
-    },
-  },
-}
+      this.passwordFieldTypeRetype =
+        this.passwordFieldTypeRetype === "password" ? "text" : "password";
+    }
+  }
+};
 </script>

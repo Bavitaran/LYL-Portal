@@ -1,16 +1,13 @@
 <template>
 
-  <!-- Table Container Card -->
-  <b-card
+  <!-- <b-card v-if="invoices.length > 0"
     no-body
   >
 
     <div class="m-2">
 
-      <!-- Table Top -->
       <b-row>
 
-        <!-- Per Page -->
         <b-col
           cols="12"
           md="6"
@@ -32,7 +29,6 @@
           </b-button>
         </b-col>
 
-        <!-- Search -->
         <b-col
           cols="12"
           md="6"
@@ -75,16 +71,16 @@
       class="position-relative"
     >
 
-      <template #head(invoiceStatus)>
+      <template  #head(invoiceStatus)>
         <feather-icon
           icon="TrendingUpIcon"
           class="mx-auto"
         />
       </template>
 
-      <!-- Column: Id -->
       <template #cell(id)="data">
         <b-link
+
           :to="{ name: 'apps-invoice-preview', params: { id: data.item.id }}"
           class="font-weight-bold"
         >
@@ -92,7 +88,6 @@
         </b-link>
       </template>
 
-      <!-- Column: Invoice Status -->
       <template #cell(invoiceStatus)="data">
         <b-avatar
           :id="`invoice-row-${data.item.id}`"
@@ -119,7 +114,6 @@
         </b-tooltip>
       </template>
 
-      <!-- Column: Client -->
       <template #cell(client)="data">
         <b-media vertical-align="center">
           <template #aside>
@@ -137,14 +131,12 @@
         </b-media>
       </template>
 
-      <!-- Column: Issued Date -->
       <template #cell(issuedDate)="data">
         <span class="text-nowrap">
           {{ data.value }}
         </span>
       </template>
 
-      <!-- Column: Balance -->
       <template #cell(balance)="data">
         <template v-if="data.value === 0">
           <b-badge
@@ -159,7 +151,6 @@
         </template>
       </template>
 
-      <!-- Column: Actions -->
       <template #cell(actions)="data">
 
         <div class="text-nowrap">
@@ -187,7 +178,6 @@
             :target="`invoice-row-${data.item.id}-preview-icon`"
           />
 
-          <!-- Dropdown -->
           <b-dropdown
             variant="link"
             toggle-class="p-0"
@@ -233,7 +223,7 @@
         >
           <span class="text-muted">Showing {{ dataMeta.from }} to {{ dataMeta.to }} of {{ dataMeta.of }} entries</span>
         </b-col>
-        <!-- Pagination -->
+
         <b-col
           cols="12"
           sm="6"
@@ -268,8 +258,61 @@
 
       </b-row>
     </div>
-  </b-card>
-
+  </b-card> -->
+<div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Category</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>date</th>
+                                    <th>due_date</th>
+                                    <th>invoice_to</th>
+                                    <th>item</th>
+                                    <th>cost</th>
+                                    <th>quantity</th>
+                                    <th>price</th>
+                                    <th>description</th>
+                                    <th>sales_person</th>
+                                    <th>note</th>
+                                    <th>payment_method</th>
+                                </tr>
+                            </thead>
+                            <tbody v-if="invoices.length > 0">
+                                <tr v-for="(invoice,key) in invoices" :key="key">
+                                    <td>{{ invoice.id }}</td>
+                                    <td>{{ invoice.date }}</td>
+                                    <td>{{ invoice.due_date }}</td>
+                                    <td>{{ invoice.invoice_to }}</td>
+                                    <td>{{ invoice.item }}</td>
+                                    <td>{{ invoice.cost }}</td>
+                                    <td>{{ invoice.quantity }}</td>
+                                    <td>{{ invoice.price }}</td>
+                                    <td>{{ invoice.description }}</td>
+                                    <td>{{ invoice.sales_person }}</td>
+                                    <td>{{ invoice.note }}</td>
+                                    <td>{{ invoice.payment_method }}</td>
+                                    <td>
+                                        <router-link :to='{name:"apps-invoice-edit",params:{id:invoice.id}}' class="btn btn-success">Edit</router-link>
+                                        <button type="button" @click="deleteInvoice(invoice.id)" class="btn btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody v-else>
+                                <tr>
+                                    <td colspan="4" align="center">No invoices Found.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
 </template>
 
 <script>
@@ -298,6 +341,34 @@ import useInvoicesList from './useInvoiceList'
 import invoiceStoreModule from '../invoiceStoreModule'
 
 export default {
+    name:"invoices",
+    data(){
+        return {
+            invoices:[]
+        }
+    },
+    mounted(){
+        this.getInvoices()
+    },
+    methods:{
+        async getInvoices(){
+            await this.axios.get('/api/auth/invoice').then(response=>{
+                this.invoices = response.data
+            }).catch(error=>{
+                console.log(error)
+                this.invoices = []
+            })
+        },
+        deleteInvoice(id){
+            if(confirm("Are you sure to delete this category ?")){
+                this.axios.delete(`/api/auth/invoice/${id}`).then(response=>{
+                    this.getInvoices()
+                }).catch(error=>{
+                    console.log(error)
+                })
+            }
+        }
+    },
   components: {
     BCard,
     BRow,
