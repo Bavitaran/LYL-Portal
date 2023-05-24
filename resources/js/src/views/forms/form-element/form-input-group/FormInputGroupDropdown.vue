@@ -1,17 +1,11 @@
 <template>
   <b-card-code title="Input Groups With Dropdown">
     <b-row>
-      <b-col
-        lg="6"
-        class="mb-1"
-      >
+      <b-col lg="6" class="mb-1">
         <!-- dropdown in right side -->
         <b-input-group>
           <b-input-group-prepend>
-            <b-dropdown
-              text="Action"
-              variant="outline-primary"
-            >
+            <b-dropdown text="Action" variant="outline-primary">
               <b-dropdown-item>Action </b-dropdown-item>
               <b-dropdown-item>Another Action</b-dropdown-item>
               <b-dropdown-item>Something else here</b-dropdown-item>
@@ -23,7 +17,6 @@
         </b-input-group>
       </b-col>
       <b-col lg="6">
-
         <!-- dropdown in both side -->
         <b-input-group>
           <b-input-group-prepend>
@@ -40,11 +33,7 @@
           </b-input-group-prepend>
           <b-form-input placeholder="Dropdown on both side" />
           <b-input-group-append>
-            <b-dropdown
-              text="Action"
-              variant="outline-primary"
-              right
-            >
+            <b-dropdown text="Action" variant="outline-primary" right>
               <b-dropdown-item>Action </b-dropdown-item>
               <b-dropdown-item>Another Action</b-dropdown-item>
               <b-dropdown-item>Something else here</b-dropdown-item>
@@ -52,7 +41,6 @@
               <b-dropdown-item>Separated link</b-dropdown-item>
             </b-dropdown>
           </b-input-group-append>
-
         </b-input-group>
       </b-col>
     </b-row>
@@ -64,7 +52,7 @@
 </template>
 
 <script>
-import BCardCode from '@core/components/b-card-code'
+import BCardCode from "@core/components/b-card-code";
 import {
   BInputGroup,
   BFormInput,
@@ -74,9 +62,9 @@ import {
   BDropdownItem,
   BDropdownDivider,
   BRow,
-  BCol,
-} from 'bootstrap-vue'
-import { codeDropdown } from './code'
+  BCol
+} from "bootstrap-vue";
+import { codeDropdown } from "./code";
 
 export default {
   components: {
@@ -89,12 +77,12 @@ export default {
     BDropdown,
     BDropdownItem,
     BRow,
-    BCol,
+    BCol
   },
   data() {
     return {
-      codeDropdown,
-    }
-  },
-}
+      codeDropdown
+    };
+  }
+};
 </script>

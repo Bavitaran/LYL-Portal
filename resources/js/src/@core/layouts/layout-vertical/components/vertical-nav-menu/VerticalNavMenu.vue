@@ -2,8 +2,12 @@
   <div
     class="main-menu menu-fixed menu-accordion menu-shadow"
     :class="[
-      { 'expanded': !isVerticalMenuCollapsed || (isVerticalMenuCollapsed && isMouseHovered) },
-      skin === 'light'|| skin === 'bordered' ? 'menu-light' : 'menu-dark'
+      {
+        expanded:
+          !isVerticalMenuCollapsed ||
+          (isVerticalMenuCollapsed && isMouseHovered)
+      },
+      skin === 'light' || skin === 'bordered' ? 'menu-light' : 'menu-dark'
     ]"
     @mouseenter="updateMouseHovered(true)"
     @mouseleave="updateMouseHovered(false)"
@@ -17,19 +21,15 @@
         :collapseTogglerIcon="collapseTogglerIcon"
       >
         <ul class="nav navbar-nav flex-row">
-
           <!-- Logo & Text -->
           <li class="nav-item mr-auto">
-            <b-link
-              class="navbar-brand"
-              to="/"
-            >
-              <span class="brand-logo">
+            <b-link class="navbar-brand" to="/">
+              <!-- <span class="brand-logo">
                 <b-img
                   :src="appLogoImage"
                   alt="logo"
                 />
-              </span>
+              </span> -->
               <h2 class="brand-text">
                 {{ appName }}
               </h2>
@@ -59,17 +59,18 @@
     <!-- / main menu header-->
 
     <!-- Shadow -->
-    <div
-      :class="{'d-block': shallShadowBottom}"
-      class="shadow-bottom"
-    />
+    <div :class="{ 'd-block': shallShadowBottom }" class="shadow-bottom" />
 
     <!-- main menu content-->
     <vue-perfect-scrollbar
       :settings="perfectScrollbarSettings"
       class="main-menu-content scroll-area"
       tagname="ul"
-      @ps-scroll-y="evt => { shallShadowBottom = evt.srcElement.scrollTop > 0 }"
+      @ps-scroll-y="
+        (evt) => {
+          shallShadowBottom = evt.srcElement.scrollTop > 0;
+        }
+      "
     >
       <vertical-nav-menu-items
         :items="navMenuItems"
@@ -81,34 +82,34 @@
 </template>
 
 <script>
-import VuePerfectScrollbar from 'vue-perfect-scrollbar'
-import { BLink, BImg } from 'bootstrap-vue'
-import { provide, computed, ref } from '@vue/composition-api'
-import useAppConfig from '@core/app-config/useAppConfig'
-import { $themeConfig } from '@themeConfig'
-import VerticalNavMenuItems from './components/vertical-nav-menu-items/VerticalNavMenuItems.vue'
-import useVerticalNavMenu from './useVerticalNavMenu'
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
+import { BLink, BImg } from "bootstrap-vue";
+import { provide, computed, ref } from "@vue/composition-api";
+import useAppConfig from "@core/app-config/useAppConfig";
+import { $themeConfig } from "@themeConfig";
+import VerticalNavMenuItems from "./components/vertical-nav-menu-items/VerticalNavMenuItems.vue";
+import useVerticalNavMenu from "./useVerticalNavMenu";
 
 export default {
   components: {
     VuePerfectScrollbar,
     VerticalNavMenuItems,
     BLink,
-    BImg,
+    BImg
   },
   props: {
     isVerticalMenuActive: {
       type: Boolean,
-      required: true,
+      required: true
     },
     toggleVerticalMenuActive: {
       type: Function,
-      required: true,
+      required: true
     },
     navMenuItems: {
       type: Array,
-      required: true,
-    },
+      required: true
+    }
   },
   setup(props) {
     const {
@@ -116,25 +117,27 @@ export default {
       isVerticalMenuCollapsed,
       collapseTogglerIcon,
       toggleCollapsed,
-      updateMouseHovered,
-    } = useVerticalNavMenu(props)
+      updateMouseHovered
+    } = useVerticalNavMenu(props);
 
-    const { skin } = useAppConfig()
+    const { skin } = useAppConfig();
 
     // Shadow bottom is UI specific and can be removed by user => It's not in `useVerticalNavMenu`
-    const shallShadowBottom = ref(false)
+    const shallShadowBottom = ref(false);
 
-    provide('isMouseHovered', isMouseHovered)
+    provide("isMouseHovered", isMouseHovered);
 
     const perfectScrollbarSettings = {
       maxScrollbarLength: 60,
-      wheelPropagation: false,
-    }
+      wheelPropagation: false
+    };
 
-    const collapseTogglerIconFeather = computed(() => (collapseTogglerIcon.value === 'unpinned' ? 'CircleIcon' : 'DiscIcon'))
+    const collapseTogglerIconFeather = computed(() =>
+      collapseTogglerIcon.value === "unpinned" ? "CircleIcon" : "DiscIcon"
+    );
 
     // App Name
-    const { appName, appLogoImage } = $themeConfig.app
+    const { appName, appLogoImage } = $themeConfig.app;
 
     return {
       perfectScrollbarSettings,
@@ -153,10 +156,10 @@ export default {
 
       // App Name
       appName,
-      appLogoImage,
-    }
-  },
-}
+      appLogoImage
+    };
+  }
+};
 </script>
 
 <style lang="scss">

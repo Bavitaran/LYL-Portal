@@ -15,3 +15,4 @@ use App\Http\Controllers\ApplicationController;
 */
 
 Route::get('/{any}', [ApplicationController::class, 'index'])->where('any', '.*');
+// Route::post('/pages/authentication/register-v1', 'RegisterController@createUser');
